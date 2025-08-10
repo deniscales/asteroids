@@ -33,6 +33,10 @@ def main():
         screen.fill((0, 0, 0))  # Fill the screen with black
         for each in updatable:
             each.update(dt)
+        for each in asteroids:
+            if each.collsion(new_player):
+                print("Game Over!")
+                run_the_game = False
         for each_drawable in drawable:
                 each_drawable.draw(screen)
       #  new_player.update(dt)
