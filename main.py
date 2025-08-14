@@ -23,10 +23,11 @@ def main():
     Player.containers = (updatable, drawable)  # Assuming these are defined elsewhere
     Asteroid.containers = (asteroids, updatable, drawable)  # Assuming these are defined elsewhere
     AsteroidField.containers = (updatable)  # Assuming these are defined elsewhere
-    Shot.containers = (updatable, drawable)  # Assuming these are defined elsewhere
+    Shot.containers = (shots, updatable, drawable)  # Assuming these are defined elsewhere
 
     asteroid_field = AsteroidField()
     new_player = Player(x, y, PLAYER_RADIUS)
+    
 
 
     while run_the_game:
@@ -36,8 +37,13 @@ def main():
         screen.fill((0, 0, 0))  # Fill the screen with black
         for each in updatable:
             each.update(dt)
+
         for each in asteroids:
-            if each.collsion(new_player):
+            for each_shot in shots:
+                if each.collision(each_shot):
+                    each.split()
+                    each_shot.kill()
+            if each.collision(new_player):
                 print("Game Over!")
                 run_the_game = False
         for each_drawable in drawable:
