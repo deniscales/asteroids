@@ -8,6 +8,7 @@ class Shot(CircleShape):
         self.color = (255, 0, 0)  # Default color red
         self.velocity = pygame.Vector2(0, -1)  # Initial velocity upwards
 
+
     def draw(self, screen):
         pygame.draw.circle(screen, self.color, (int(self.position.x), int(self.position.y)), self.radius)
 
